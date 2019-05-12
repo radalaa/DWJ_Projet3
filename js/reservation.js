@@ -107,28 +107,13 @@ jQuery(function ($) {
 		//verfier si les champs son valide
 		if (canvas.cursorX === '' || ($("#res-name").val() == '') || ($("#res-lastName").val() == '') || (!$("#res-name").val().match(/^[a-z]+$/i)) || (!$("#res-lastName").val().match(/^[a-z]+$/i)) ) {
 			
-				switch (canvas.cursorX === '' || ($("#res-name").val() == '') || ($("#res-lastName").val() == '') || (!$("#res-name").val().match(/^[a-z]+$/i)) || (!$("#res-lastName").val().match(/^[a-z]+$/i) )) {
-				case (canvas.cursorX === ''):
-				$('#msgAlerte').text('Merci de signer votre réservation');// Message en cas de canvas vide
-				break;
-				case ($("#res-name").val() == ''):
-				 $('#error-messsage-firstName').text('Veuillez entrer votre Nom');// Message en cas le champ nom vide 
-				break;
-				case ($("#res-lastName").val() == ''):
-				$('#error-messsage-lastName').text('Veuillez entrer votre Prènom');// Message en cas le champ nom vide 
-				break;
-				case  (!$("#res-name").val().match(/^[a-z]+$/i)):
-				//////////////////////
-				$('#error-messsage-firstName').text('Le Nom n\'est pas valide');// Message en cas le champ nom vide 
-				break;
-				case  (!$("#res-lastName").val().match(/^[a-z]+$/i)):
-				//////////////////////
-				$('#error-messsage-lastName').text('Le Prènom n\'est pas valide');// Message en cas le champ nom vide 
-				break;
-				default:
-				break;
+			//condition pour le controle de saisie
+			if (canvas.cursorX === '') {$('#msgAlerte').text('Merci de signer votre réservation');};// Message en cas de canvas vide
+			if ($("#res-name").val() == '') {$('#error-messsage-firstName').text('Veuillez entrer votre Nom');};// Message en cas le champ nom vide 
+			if ($("#res-lastName").val() == '') {$('#error-messsage-lastName').text('Veuillez entrer votre Prènom');};// Message en cas le champ nom vide 
+			if (!$("#res-name").val().match(/^[a-z]+$/i)) {$('#error-messsage-firstName').text('Le Nom n\'est pas valide');};// Message en cas le champ nom vide 	
+			if (!$("#res-lastName").val().match(/^[a-z]+$/i)) { $('#error-messsage-lastName').text('Le Prènom n\'est pas valide'); };// Message en cas le champ nom vide 	
 
-				}
 			
 			
 		} 
