@@ -48,45 +48,7 @@ var reservation = {
 		sessionStorage.dureeReservation = reservationValidity * 60;
 		sessionStorage.NomClient = $('#res-name').val();
 		sessionStorage.PrenomClient = $('#res-lastName').val();
-/////////////////////////localstorage pour ajouter le nom et prènom///////////////////////
-jQuery(function ($) {
 
-  $.fn.formBackUp = function () {
-  	if (!(localStorage)) {
-  		return false;
-  	}
-    var forms = this;
-    var datas = {};
-    var ls = false;
-    //On recupure l'URL
-    datas.href = window.location.href;
-
-    //On recupure les infos du localstorage
-    if (localStorage['formBackUp']) {
-    	ls = JSON.parse(localStorage['formBackUp']);
-    	if(ls.href == datas.href){
-    		// Boucle pour afficher le nom et le prènom dans le formulaire
-    		for (var id in ls ){
-    			if (id != 'href') {
-    				$('#'+id).val(ls[id]);
-    				datas[id]=ls[id];
-    			}
-    		}
-    	}
-
-    }
-
-    forms.find('input,textarea').keyup(function (e) {
-      datas[$(this).attr('id')] = $(this).val();
-      localStorage.setItem('formBackUp', JSON.stringify(datas));
-    });
-    //console.log(localStorage);
-  }
- 	 //appler la function formBackUp
- 	 $('form').formBackUp();
-
-});
-///////////////////fin jquery/////////////////////////////////
 
 	},
 
@@ -112,9 +74,7 @@ jQuery(function ($) {
 			if ($("#res-name").val() == '') {$('#error-messsage-firstName').text('Veuillez entrer votre Nom');};// Message en cas le champ nom vide 
 			if ($("#res-lastName").val() == '') {$('#error-messsage-lastName').text('Veuillez entrer votre Prènom');};// Message en cas le champ nom vide 
 			if (!$("#res-name").val().match(/^[a-z]+$/i)) {$('#error-messsage-firstName').text('Le Nom n\'est pas valide');};// Message en cas le champ nom vide 	
-			if (!$("#res-lastName").val().match(/^[a-z]+$/i)) { $('#error-messsage-lastName').text('Le Prènom n\'est pas valide'); };// Message en cas le champ nom vide 	
-
-			
+			if (!$("#res-lastName").val().match(/^[a-z]+$/i)) { $('#error-messsage-lastName').text('Le Prènom n\'est pas valide'); };// Message en cas le champ nom vide 		
 			
 		} 
 		else {
