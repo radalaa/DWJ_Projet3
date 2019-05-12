@@ -72,9 +72,9 @@ var Diaporama = {
 	
 
 	sliderAuto: function () {
-		var that = this;
+		var sliderauto = this;
 		slideInterval = setInterval(function () {
-			that.avancerDiapo();
+			sliderauto.avancerDiapo();
 		}, 5000);
 					
 	},
@@ -84,37 +84,37 @@ var Diaporama = {
 	},
 
 	eventsDiapo: function () {
-		var that = this;
+		var eventsDiapo = this;
 		// Ecoute des événements touches clavier
 		$(document).on('keydown', function (e) {
 			var touche = e.keyCode;
 			if (touche === 39 || touche === 37) {
-				that.sliderOff();
+				eventsDiapo.sliderOff();
 				if (touche === 39) {
-					that.avancerDiapo();
+					eventsDiapo.avancerDiapo();
 				} else if (touche === 37) {
-					that.reculerDiapo();
+					eventsDiapo.reculerDiapo();
 				}
 			}
 		});
 
 		// Ecoute survol souris
 		$('#conteneur-diapo').on('mouseover', function() {
-			that.sliderOff();
+			eventsDiapo.sliderOff();
 		});
 		
 		// Ecoute survol souris en dehors de l'élément 
 		$('#conteneur-diapo').on('mouseout', function() {
-			that.sliderAuto();
+			eventsDiapo.sliderAuto();
 		});
 
 		// Ecoute commande droite et gauche
 		$('#cmd-right').on('click', function() {
-			that.avancerDiapo();
+			eventsDiapo.avancerDiapo();
 		});
 
 		$('#cmd-left').on('click', function() {
-			that.reculerDiapo();
+			eventsDiapo.reculerDiapo();
 		});
 	}
 }

@@ -545,6 +545,10 @@ i.fa {
 #msgAlerte {
     color: red;
 }
+.error-messsage{
+    color: red;
+}
+
 
 @media all and (max-width: 1200px) {
     .conteneur {

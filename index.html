@@ -97,16 +97,18 @@
                                             <td class="station-titre">Validité</td>
                                             <td id="resa-station-validity"></td>
                                         </tr>
-                                        
-                                        <tr>
+                                        <form action="index_submit" method="get" accept-charset="utf-8">
+                                              <tr>
                                             <td class="station-titre">Votre nom</td>
-                                            <td id="resa-station-name"><input id="res-name" class="res-name" type="text" placeholder="Nom"></td>
+                                            <td id="resa-station-name"><input id="res-name" class="res-name" type="text" placeholder="Nom"><span id="error-messsage-firstName" class="error-messsage"></span></td>
                                         </tr>
                                          <tr>
                                             <td class="station-titre">Votre Prènom</td>
-                                            <td id="resa-station-lastName"><input id="res-lastName" class="res-lastName" type="text" placeholder="Prènom"></td>
+                                            <td id="resa-station-lastName"><input id="res-lastName" class="res-lastName" type="text" placeholder="Prènom"><span id="error-messsage-lastName" class="error-messsage"></span></td>
                                         </tr>
                                   
+                                        </form>
+                                      
                                     </tbody>
                                 </table>
                                 <div id="canvasDiv">

@@ -48,6 +48,46 @@ var reservation = {
 		sessionStorage.dureeReservation = reservationValidity * 60;
 		sessionStorage.NomClient = $('#res-name').val();
 		sessionStorage.PrenomClient = $('#res-lastName').val();
+/////////////////////////localstorage pour ajouter le nom et prènom///////////////////////
+jQuery(function ($) {
+
+  $.fn.formBackUp = function () {
+  	if (!(localStorage)) {
+  		return false;
+  	}
+    var forms = this;
+    var datas = {};
+    var ls = false;
+    //On recupure l'URL
+    datas.href = window.location.href;
+
+    //On recupure les infos du localstorage
+    if (localStorage['formBackUp']) {
+    	ls = JSON.parse(localStorage['formBackUp']);
+    	if(ls.href == datas.href){
+    		// Boucle pour afficher le nom et le prènom dans le formulaire
+    		for (var id in ls ){
+    			if (id != 'href') {
+    				$('#'+id).val(ls[id]);
+    				datas[id]=ls[id];
+    			}
+    		}
+    	}
+
+    }
+
+    forms.find('input,textarea').keyup(function (e) {
+      datas[$(this).attr('id')] = $(this).val();
+      localStorage.setItem('formBackUp', JSON.stringify(datas));
+    });
+    //console.log(localStorage);
+  }
+ 	 //appler la function formBackUp
+ 	 $('form').formBackUp();
+
+});
+///////////////////fin jquery/////////////////////////////////
+
 	},
 
 // Affiche les différentes durée de la réservation
@@ -60,8 +100,37 @@ var reservation = {
 	},
 
 	verifValide: function() {
-		if (canvas.cursorX === '') {
-			$('#msgAlerte').text('Merci de signer votre réservation');// Message en cas de canvas vide
+		$('#error-messsage-lastName').text('');// vider le champ message erreur nom
+		$('#error-messsage-firstName').text('');// vider le champ message erreur prènom
+		$('#msgAlerte').text('');// vider le champ message erreur signature
+
+		//verfier si les champs son valide
+		if (canvas.cursorX === '' || ($("#res-name").val() == '') || ($("#res-lastName").val() == '') || (!$("#res-name").val().match(/^[a-z]+$/i)) || (!$("#res-lastName").val().match(/^[a-z]+$/i)) ) {
+			
+				switch (canvas.cursorX === '' || ($("#res-name").val() == '') || ($("#res-lastName").val() == '') || (!$("#res-name").val().match(/^[a-z]+$/i)) || (!$("#res-lastName").val().match(/^[a-z]+$/i) )) {
+				case (canvas.cursorX === ''):
+				$('#msgAlerte').text('Merci de signer votre réservation');// Message en cas de canvas vide
+				break;
+				case ($("#res-name").val() == ''):
+				 $('#error-messsage-firstName').text('Veuillez entrer votre Nom');// Message en cas le champ nom vide 
+				break;
+				case ($("#res-lastName").val() == ''):
+				$('#error-messsage-lastName').text('Veuillez entrer votre Prènom');// Message en cas le champ nom vide 
+				break;
+				case  (!$("#res-name").val().match(/^[a-z]+$/i)):
+				//////////////////////
+				$('#error-messsage-firstName').text('Le Nom n\'est pas valide');// Message en cas le champ nom vide 
+				break;
+				case  (!$("#res-lastName").val().match(/^[a-z]+$/i)):
+				//////////////////////
+				$('#error-messsage-lastName').text('Le Prènom n\'est pas valide');// Message en cas le champ nom vide 
+				break;
+				default:
+				break;
+
+				}
+			
+			
 		} 
 		else {
 			// Si on tente de reserver à nouveau sur la station deja reservée
@@ -86,9 +155,11 @@ var reservation = {
 			}
 			else {
 				reservation.createReservation();
+				//arrêter l'evenement click du button valider
+				$('#valide').off('click', this.verifValide);
 			}
 		}
-		$('#valide').off('click', this.verifValide);
+		
 	},
 
 // Crée la réservation et lance le décompte
@@ -113,15 +184,15 @@ var reservation = {
 // Décompte toutes les 1000 millisecondes
 	decompteReservation : function() {
 		if (this.duree > 0) {
-			var that = this;
+			var reservationEncours = this;
 			this.decompteId = setInterval(function() {
-				if (that.duree <= 0) {
-					that.cancelReservation();
+				if (reservationEncours.duree <= 0) {
+					reservationEncours.cancelReservation();
 					sessionStorage.clear();
 				} else {
-					that.duree--;					
-					sessionStorage.dureeReservation = that.duree;
-					that.setTimer(false);
+					reservationEncours.duree--;					
+					sessionStorage.dureeReservation = reservationEncours.duree;
+					reservationEncours.setTimer(false);
 					infosCurrentReservation.setCurrentInfos(true);
 					currentStation.setStatus();
 				}
@@ -132,9 +203,9 @@ var reservation = {
 // Verification du rechargement de la page 
 	refreshReservation: function() {
 		window.addEventListener('load', function () {
-			var that = this;
+			var rechargementPage = this;
 			if (sessionStorage.statusReservation === 'true') {
-				clearInterval(that.decompteId);
+				clearInterval(rechargementPage.decompteId);
 				reservation.duree = Number(sessionStorage.dureeReservation);
 				reservation.decompteReservation();
 			}

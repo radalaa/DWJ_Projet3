@@ -84,41 +84,43 @@ var canvas = {
 // Prépare le canvas en fonction des événements
 	prepareCanvas : function () {
 		this.context.lineJoin = "round";
-		var that = this;
+		var canvasmovement = this;
 
 		// Click souris enfoncé sur le canvas
 		$('#sign').on('mousedown', function(e){
-		  that.moveStart(e, false, that.canvas[0]);
+		  canvasmovement.moveStart(e, false, canvasmovement.canvas[0]);
 		});
 
 		// Mouvement de la souris sur le canvas
 		$('#sign').on('mousemove', function(e){
-		  that.move(e, false, that.canvas[0]);
+		  canvasmovement.move(e, false, canvasmovement.canvas[0]);
 		});
 
 		// Relachement du Click sur le canvas 
 		$('#sign').on('mouseup', function(e) {
-  			that.moveEnd();
+  			canvasmovement.moveEnd();
 		});
 
 		// Clear canvas :
 		$('#reset').on('click', function() {
-			that.clear();
+			canvasmovement.clear();
+			canvasmovement.init();
+
 		});
 
 		// appuie avec le doigt 
 		$('#sign').on('touchstart', function(e) {
-			that.moveStart(e, true, that.canvas[0]);
+			canvasmovement.moveStart(e, true, canvasmovement.canvas[0]);
 		});
 
 		// Relachement du doigt 
 		$('#sign').on('touchend', function() {
-			that.moveEnd();
+			canvasmovement.moveEnd();
 		});
 
 		// deplacement du doigt 
 		$('#sign').on('touchmove', function(e) {
-			that.move(e, true, that.canvas[0]);
+			canvasmovement.move(e, true, canvasmovement.canvas[0]);
 		});
 	},
 

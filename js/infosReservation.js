@@ -7,16 +7,6 @@ var infosReservation = {
 		$('#resa-station-validity').text(reservationValidity + ' min');
 	}
 };
-var viderInfos = {
-	NoInfos: function() {
-		$('#resa-station-nom').text('');
-		$('#resa-station-adresse').text('');
-		$('#resa-station-validity').text('');
-		$('#name-statu').text('');
-		$('#lastname-statu').text('');
-	}
-};
-
 var infosCurrentReservation = {
 		reserved:'Vous avez une réservation en cours à la station :',
 		noReserved: 'Aucune réservation en cours',
@@ -29,6 +19,8 @@ var infosCurrentReservation = {
 			$('#compteur-reservation').text('Votre réservation expirera dans ').append(' <span>' + reservation.dureeMinutes + 'mn et ' + reservation.dureeSecondes + 'sec</span>');
 			$('#cancel').show().on('click', function() {
 				reservation.duree = 0;
+				//vider sessionStorage
+				sessionStorage.clear();
 			});
 		} else {
 			$('#status-reservation').text(infosCurrentReservation.noReserved);
