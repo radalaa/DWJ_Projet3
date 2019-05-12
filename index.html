@@ -29,6 +29,7 @@
 
 </head>
 <body>
+
     <div id="main" class="container-fluid">
         <header id="logo">
             <div class="conteneur row">
@@ -97,14 +98,14 @@
                                             <td class="station-titre">Validité</td>
                                             <td id="resa-station-validity"></td>
                                         </tr>
-                                        <form action="index_submit" method="get" accept-charset="utf-8">
+                                        <form class="dorm-horizintal" action="/" method="post">
                                               <tr>
                                             <td class="station-titre">Votre nom</td>
                                             <td id="resa-station-name"><input id="res-name" class="res-name" type="text" placeholder="Nom"><div id="error-messsage-firstName" class="error-messsage"></div></td>
                                         </tr>
                                          <tr>
                                             <td class="station-titre">Votre Prènom</td>
-                                            <td id="resa-station-lastName"><input id="res-lastName" class="res-lastName" type="text" placeholder="Prènom"><div id="error-messsage-lastName" class="error-messsage"></div></td>
+                                            <td id="resa-station-lastName"><input id="res-lastName" class="res-lastName" type="text" placeholder="Prenom"><div id="error-messsage-lastName" class="error-messsage"></div></td>
                                         </tr>
                                   
                                         </form>
@@ -184,13 +185,13 @@
 
     <script src="js/markerclusterer.js"></script>
     <script src="js/ajax.js"></script>
+    <script src="js/localstorage.js"></script>
     <script src="js/reservation.js"></script>
     <script src="js/infosReservation.js"></script>
     <script src="js/infosCurrentReservation.js"></script>
     <script src="js/diapo.js"></script>
     <script src="js/station.js"></script>
     <script src="js/currentStation.js"></script>
-    <script src="js/eleve.js"></script>
     <script src="js/canvas.js"></script>
     <script src="js/gmap.js"></script>
     <script src="js/app.js"></script>
